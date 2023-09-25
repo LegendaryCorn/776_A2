@@ -13,11 +13,11 @@ def main():
     # Generation Count
     # Crossover Probability
     # Mutation Probability
-    params = [100, 150, 0.667, 0.01]
+    params = [100, 150, 0.9, 0.05]
     ##########################################
 
     gen_algo = ga.GeneticAlgorithm(ev1.EvaluatorDeJong1(), params)
-    gen_algo.run_sga()
+    gen_algo.run_chc()
 
 ##########################################################################  
 
