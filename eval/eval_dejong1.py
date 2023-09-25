@@ -1,4 +1,4 @@
-import eval_base
+from eval import eval_base
 
 class EvaluatorDeJong1(eval_base.Evaluator):
     ########################################################################## 

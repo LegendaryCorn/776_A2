@@ -1,6 +1,6 @@
 import genetic_algorithm as ga
 import numpy as np
-import eval_dejong1 as ev1
+from eval import eval_dejong1 as ev1
 
 ##########################################################################  
 # The main function
