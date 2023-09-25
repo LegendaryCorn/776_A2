@@ -29,7 +29,7 @@ class GeneticAlgorithm:
             pop_new = self.pop.generate_children(self.p_cross, self.p_mut)
             pop_new.eval_pop(self.eval)
             self.pop = pop_new
-            self.record_pop(pop_new)
+            self.record_pop(self.pop)
 
     ##########################################################################
 
@@ -47,7 +47,7 @@ class GeneticAlgorithm:
             pop_new = self.pop.generate_children(self.p_cross, self.p_mut)
             pop_new.eval_pop(self.eval)
             self.pop = self.chc(self.pop, pop_new)
-            self.record_pop(pop_new)
+            self.record_pop(self.pop)
 
     ##########################################################################
 
