@@ -11,12 +11,12 @@ class Population:
 
     ##########################################################################
     # Will randomly generate individuals.
-    def random_generate_individuals(self, pop_size):
+    def random_generate_individuals(self, pop_size, ind_len):
 
         self.inds = []
 
         for i in range(pop_size):
-            self.inds.append(individual.Individual(100))
+            self.inds.append(individual.Individual(ind_len))
     ##########################################################################
 
     ##########################################################################
@@ -25,6 +25,7 @@ class Population:
 
         new_pop = Population()
         pop_size = len(self.inds)
+        chrom_len = len(self.inds[0].chromosome)
         total_fitness = 0
 
         ##########################################
@@ -49,10 +50,10 @@ class Population:
                 continue
 
             if(np.random.random() < p_cross):
-                new_chrom_1 = new_pop.inds[i].chromosome
-                new_chrom_2 = new_pop.inds[i+1].chromosome
+                new_chrom_1 = new_pop.inds[i].chromosome.copy()
+                new_chrom_2 = new_pop.inds[i+1].chromosome.copy()
 
-                for j in range(np.random.randint(pop_size - 1) + 1):
+                for j in range(np.random.randint(chrom_len - 1) + 1):
                     new_chrom_1[j] = new_pop.inds[i+1].chromosome[j]
                     new_chrom_2[j] = new_pop.inds[i].chromosome[j]
 
@@ -63,7 +64,7 @@ class Population:
         ##########################################
         # Mutation
         for i in range(pop_size):
-            for j in range(len(new_pop.inds[i].chromosome)):
+            for j in range(chrom_len):
                 if(np.random.random() < p_mut):
                     new_pop.inds[i].chromosome[j] = 1 - new_pop.inds[i].chromosome[j]
         ##########################################

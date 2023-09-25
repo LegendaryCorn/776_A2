@@ -1,3 +1,4 @@
+import numpy as np
 
 # This class will be used to convert a chromosome substring into a float that will be used in an evaluator.
 # The evaluator MUST define this value.
@@ -7,8 +8,8 @@ class DecodeKey:
     def __init__(self, min, max, prec):
         self.min = min
         self.max = max
-        self.precision = prec # Todo
-        self.bits = 10
+        self.bits = int(np.floor(np.log2(((max - min) / prec) + 1)))
+        self.precision = (max - min) / (np.exp2(self.bits) - 1)
     ##########################################################################
 
     ##########################################################################
@@ -20,7 +21,7 @@ class DecodeKey:
             chrom_val += pow(2, e) if gene == 1 else 0
             e += 1
 
-        return (chrom_val / (pow(2, len(chrom)) - 1)) * self.precision + self.min
+        return chrom_val * self.precision + self.min
     ##########################################################################     
 
 
@@ -33,6 +34,18 @@ class Evaluator:
     def __init__(self):
         self.decode_keys = []
     ########################################################################## 
+
+    ########################################################################## 
+    # Gets the chromosome length, assumes decode keys has a value.
+    def get_chrom_len(self):
+
+        total = 0
+
+        for dkey in self.decode_keys:
+            total += dkey.bits
+
+        return total
+    ##########################################################################    
 
     ########################################################################## 
     # Should not be changed in inherited classes.

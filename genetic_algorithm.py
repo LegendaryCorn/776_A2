@@ -18,7 +18,7 @@ class GeneticAlgorithm:
     def run_sga(self):
 
         # Initialize
-        self.pop.random_generate_individuals(self.pop_size)
+        self.pop.random_generate_individuals(self.pop_size, self.eval.get_chrom_len())
         self.pop.eval_pop(self.eval)
         self.record_pop(self.pop) # Should record the initial population
 
@@ -36,7 +36,7 @@ class GeneticAlgorithm:
     def run_chc(self):
 
         # Initialize
-        self.pop.random_generate_individuals(self.pop_size)
+        self.pop.random_generate_individuals(self.pop_size, self.eval.get_chrom_len())
         self.pop.eval_pop(self.eval)
         self.record_pop(self.pop) # Should record the initial population
 
@@ -52,4 +52,7 @@ class GeneticAlgorithm:
     ########################################################################## 
     # Records GA data
     def record_pop(self, pop_to_record):
-        print(pop_to_record.inds[0].fitness)    
+        max_fit = 0
+        for ind in pop_to_record.inds:
+            max_fit = max(ind.fitness, max_fit) 
+        print(max_fit)
