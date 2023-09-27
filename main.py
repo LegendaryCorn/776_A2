@@ -26,7 +26,7 @@ def main():
 
     # Pick the DeJong function
     eval_list = [ev1.EvaluatorDeJong1(), ev2.EvaluatorDeJong2(), ev3.EvaluatorDeJong3(), ev4.EvaluatorDeJong4(), ev5.EvaluatorDeJong5()]
-    eval_to_use = eval_list[int(config[0])]
+    eval_to_use = eval_list[int(config[0]) - 1]
 
     r_seed = int(config[1])
     run_count = int(config[2])
