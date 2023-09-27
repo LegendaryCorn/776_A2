@@ -10,7 +10,7 @@ class EvaluatorDeJong4(eval_base.Evaluator):
     ##########################################################################
   
     ########################################################################## 
-    # Maximum fitness should be around 1. Worse performers are closer to 0.
+    # Maximum fitness is weird because of the randomness. Above 1 means that the parameters are likely correct.
     def evaluate(self, params):
 
         obj = 0
@@ -19,5 +19,5 @@ class EvaluatorDeJong4(eval_base.Evaluator):
             obj += (i+1) * pow(params[i], 4)
             obj += np.random.normal(0, 1) # The random
 
-        return 1.0 / (obj + 1.0) # Because of the noise, I have to change this a bit
+        return 1.0 / (obj + 1.0)
     ########################################################################## 

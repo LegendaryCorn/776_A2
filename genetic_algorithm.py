@@ -13,6 +13,10 @@ class GeneticAlgorithm:
         self.gen_count = params[1]
         self.p_cross = params[2]
         self.p_mut = params[3]
+
+        self.r_min = []
+        self.r_avg = []
+        self.r_max = []
     ########################################################################## 
 
     ########################################################################## 
@@ -91,6 +95,8 @@ class GeneticAlgorithm:
             min_fit = min(ind.fitness, min_fit)
             max_fit = max(ind.fitness, max_fit) 
             sum_fit += ind.fitness
-            count += 1
+            count += 1.0
 
-        print(min_fit, sum_fit / count, max_fit)
+        self.r_min.append(min_fit)
+        self.r_avg.append(sum_fit / count)
+        self.r_max.append(max_fit)
