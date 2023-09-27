@@ -1,5 +1,6 @@
 import genetic_algorithm as ga
 import numpy as np
+import matplotlib.pyplot as plt
 import sys
 
 from eval import eval_dejong1 as ev1
@@ -39,6 +40,11 @@ def main():
     params = [int(config[3]), int(config[4]), config[5], config[6]]
     ##########################################
 
+    # Some arrays that will be useful:
+    all_min = []
+    all_avg = []
+    all_max = []
+
     for i in range(run_count):
         np.random.seed(r_seed + i)
         gen_algo = ga.GeneticAlgorithm(eval_to_use, params)
@@ -46,6 +52,29 @@ def main():
             gen_algo.run_chc()
         else:
             gen_algo.run_sga()
+        
+        all_min.append(gen_algo.r_min)
+        all_avg.append(gen_algo.r_avg)
+        all_max.append(gen_algo.r_max)
+    
+    # Printing the max at the end for all GA's (used for reliability/quality)
+    np_max = np.array(all_max)
+    print(np_max[:,int(config[4])])
+
+    # The plotting
+    plot_min = np.average(all_min, 0)
+    plot_avg = np.average(all_avg, 0)
+    plot_max = np.average(all_max, 0)
+
+    title_num = str(int(config[0]))
+    title_extra = "CHC" if config[7] == 1.0 else "SGA"
+    plt.title("Dejong Function " + title_num + " Performance (" + title_extra + ")")
+    plt.plot(range(params[1] + 1), plot_max, label='Max')
+    plt.plot(range(params[1] + 1), plot_avg, label='Avg')
+    plt.plot(range(params[1] + 1), plot_min, label='Min')
+    plt.legend()
+    plt.savefig('graphs/dejong' + title_num + '_' + title_extra, dpi=200)
+    plt.show()
 
 ##########################################################################  
 

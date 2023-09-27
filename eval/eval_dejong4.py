@@ -17,7 +17,7 @@ class EvaluatorDeJong4(eval_base.Evaluator):
 
         for i in range(len(params)):
             obj += (i+1) * pow(params[i], 4)
-            obj += np.random.normal(0, 1) # The random
+        obj += np.random.normal(0, 1) # Noise
 
         return 1.0 / (obj + 1.0)
     ########################################################################## 
